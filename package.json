@@ -7,6 +7,7 @@
     "test": "mocha test",
     "pretest": "sh ./scripts/pre-test.sh",
     "coverage": "nyc --lines 70 --reporter=lcov --reporter=text-summary --report-dir ./coverage npm run test",
+    "migrate": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "start": "node ."
   },
   "repository": {
