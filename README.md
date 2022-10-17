@@ -101,7 +101,32 @@ knex seed:run
 
 This app has a simple `JWT` authentication, which you can generate at https://jwt.io using the secret `qonto-secret-simulation`.
 
-Having done this you can now access the app passing the `Bearer <token>` in the Authorization header.
+Having done this you can now access the app passing the `Bearer <token>` through the Authorization header parameter.
+
+In case you want to validate requests from the balancer feel free to add rules at our `nginx-def.conf` file as you need adding your own public `IP` address: 
+```bash
+http{
+   ...
+   allow 45.43.23.21;
+   deny all;
+   ...
+}
+
+server{
+    ...
+    allow 45.43.23.21;
+    deny all;
+    ...
+}
+
+
+location / {
+   allow 45.43.23.21;
+   deny all;
+}
+```
+
+# Test Coverage
 
 you can check if everything is fine running the assertions
 ```bash
@@ -111,8 +136,6 @@ generate coverage
 ```bash
 npm run coverage
 ```
-
-# Test Coverage
 
 here you have the test coverage report:
 <img width="1206" alt="Screen Shot 2022-10-17 at 21 31 53" src="https://user-images.githubusercontent.com/33763843/196266170-4a688771-f154-468e-b181-eb7f12373d65.png">
