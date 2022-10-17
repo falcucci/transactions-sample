@@ -14,7 +14,6 @@ services:
     command: npm run start
     volumes:
       - .:/app/
-      - /app/node_modules
     networks:
       - default
 
@@ -33,3 +32,14 @@ services:
       POSTGRES_DB: qonto_accounts_db
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-def.conf:/etc/nginx/nginx.conf
+    environment:
+      - NGINX_PORT=80
+    networks:
+      - default
