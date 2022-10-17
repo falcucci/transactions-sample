@@ -137,6 +137,24 @@ generate coverage
 npm run coverage
 ```
 
-here you have the test coverage report:
+here you have a simple test coverage report:
+
 <img width="1206" alt="Screen Shot 2022-10-17 at 21 31 53" src="https://user-images.githubusercontent.com/33763843/196266170-4a688771-f154-468e-b181-eb7f12373d65.png">
 
+# Final considerations
+
+Due to the fact that we want to have a solution which can be scalable I just decided to use `postgres` database instead of `sqlite` for this challenge to avoid mainly this issue and future problems related to a high throughput in the service since this `sqlite` is an embedded db.
+
+Another reason is due to concurrency issues which `sqlite` wouldn't be able to handle well once we are dealing with sensitive data as payments transactions. 
+
+`Sequelize` lib is an useful lib which can help us to avoid this problems automatically just enabling the [optimistic-locking](https://sequelize.org/docs/v6/other-topics/optimistic-locking/) to avoid overwriting versioning the data and avoiding possible bugs. This problem is also really recurrent for product stocks aswell.
+
+This challenge resolves to follwing tasks:
+1. Verify the validity of the request: whether the Qonto customer has enough funds for all the transfers in the request. If the customer does not have enough funds, the entire request should be denied;
+2. If the request must be denied, return a 422 HTTP response;
+3. Otherwise, add the transfers to the database, update the customer's balance, and return a 201 HTTP response;
+4. Ensure you don’t lose a cent during processing;
+5. Assume the server will have multiple load-balanced instances;
+6. Consider that any process can crash at any point without warning, including the client; similarly, any network connection can glitch,
+7. Pretend you are using PostgreSQL, MySQL, or a similar relational database, but you can use the provided Sqlite database instead to get going faster,
+8. Ensure you don’t accept a request that the balance shouldn’t allow, and vice- versa.
