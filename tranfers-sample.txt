@@ -1,0 +1,3 @@
+id |counterparty_name      |counterparty_iban   |counterparty_bic|amount_cents|bank_account_id|description
+1  |ACME Corp. Main Account|EE382200221020145685|CCOPFRPPXXX     |11,000,000  |1              |Treasury management
+2  |Bip Bip                |EE383680981021245685|CRLYFRPPTOU     |1,000,000   |1              |Bip Bip Salary

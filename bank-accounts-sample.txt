@@ -1,0 +1,2 @@
+id |organization_name|balance_cents|iban                       |bic
+1  |ACME Corp        |10,000,000   |FR10474608000002006107XXXXX|OIVUSCLQXXX

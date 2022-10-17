@@ -1,0 +1,35 @@
+version: "3"
+services:
+  app:
+    restart: on-failure
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATASOURCES_ACCOUNT_ADDR: postgres
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    command: npm run start
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    networks:
+      - default
+
+  postgres:
+    image: postgres:11
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "accounts" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: accounts
+      POSTGRES_PASSWORD: localhost
+      POSTGRES_DB: qonto_accounts_db
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
