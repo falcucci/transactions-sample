@@ -1,4 +1,4 @@
-<h1 align="center">QONTO TRANSACTIONS API</h1>
+<h1 align="center">QONTO TRANSACTIONS SERVICE</h1>
 
 <p align="center">A Qonto assignment.</p>
 
