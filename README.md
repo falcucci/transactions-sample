@@ -99,8 +99,3 @@ to avoid any trouble in case of using docker I highly recommend you to stop your
 ```bash
 brew services stop postgresql
 ```
-
-### Improvements to do
-
-- add better assertions to check the responses payload using mocks;
-- better docs using jsdocs on methods and/or swagger/blueprint;
