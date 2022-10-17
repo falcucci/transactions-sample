@@ -7,7 +7,7 @@ const indexController = require('./../controllers/index');
 module.exports = function (app) {
   app.use(mount(config.application.basePath, transfersRouter.middleware()));
   app.use(require('koa-router')().get(
-    config.application.basePath,
+    '/health',
     indexController.healthCheck
   ).middleware());
 }

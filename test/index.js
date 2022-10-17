@@ -16,7 +16,7 @@ const server = app.listen();
 describe('route /', () => {
   describe('GET Health Check /', () => {
     it('should respond with OK', async function() {
-      const url = basePath + '/';
+      const url = '/health';
       const headers = { "Accept": 'application/json' };
       const res = await chai.request(server).get(url).set(headers);
       res.should.have.status(HttpStatus.OK);
