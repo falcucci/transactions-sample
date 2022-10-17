@@ -4,8 +4,9 @@ WORKDIR /app
 
 COPY ./package.json .
 RUN npm cache clean --force
+RUN npm install knex
+RUN npm run migrate
 RUN npm install
-RUN knex migrate:latest
 COPY . .
 
 EXPOSE 3000

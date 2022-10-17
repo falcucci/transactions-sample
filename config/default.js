@@ -26,7 +26,7 @@ module.exports = {
         },
         pool: {
           max:
-            process.env["DATASOURCES_ACCOUNT_OPTIONS_POOL_MAX"] || 5,
+            process.env["DATASOURCES_ACCOUNT_OPTIONS_POOL_MAX"] || 10,
           min:
             process.env["DATASOURCES_ACCOUNT_OPTIONS_POOL_MIN"] || 1,
           idle:

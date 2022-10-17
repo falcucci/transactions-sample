@@ -1,6 +1,6 @@
 version: "3"
 services:
-  app:
+  app01:
     restart: on-failure
     build: .
     depends_on:
@@ -8,9 +8,40 @@ services:
     environment:
       DATASOURCES_ACCOUNT_ADDR: postgres
       NODE_ENV: development
-      PORT: 3000
     ports:
-      - "3000:3000"
+      - "3001"
+    command: npm run start
+    volumes:
+      - .:/app/
+    networks:
+      - default
+
+  app02:
+    restart: on-failure
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATASOURCES_ACCOUNT_ADDR: postgres
+      NODE_ENV: development
+    ports:
+      - "3002"
+    command: npm run start
+    volumes:
+      - .:/app/
+    networks:
+      - default
+
+  app03:
+    restart: on-failure
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATASOURCES_ACCOUNT_ADDR: postgres
+      NODE_ENV: development
+    ports:
+      - "3003"
     command: npm run start
     volumes:
       - .:/app/
