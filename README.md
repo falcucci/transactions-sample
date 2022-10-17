@@ -11,13 +11,41 @@ Make sure you have installed [Node.js](https://nodejs.org/) <= 12, [Npm](https:/
 	
 Just check them by `git --version`, `node -v` and `npm -v`.
 
-clone this repository to your computer.
+clone this repository to your machine.
 
 ```bash
 git clone git@github.com:falcucci/payments.git
 ```
 
-install all dependencies:
+## Networking diagram
+
+<img width="1180" alt="Screen Shot 2022-10-18 at 01 08 21" src="https://user-images.githubusercontent.com/33763843/196300022-5cddbc3e-9c3f-487d-b647-7d05ca3da2f2.png">
+
+Running our `docker-compose` file we can have this scenario ready for using as follows load balancer validations:
+
+- Load Balancing three Docker containers with Nginx
+- Load Balancing by health check
+- Load Balancing by weight check
+
+Make sure you have docker and docker compose installed.
+
+After that, run the docker compose:
+
+```
+sudo docker-compose up -d
+```
+
+Also please, run our migrations manually just to make sure that everything is okay for consuming the application and send requests.
+
+```bash
+docker exec payments_app01_1 sh -c "npm run migrate"
+docker exec payments_app02_1 sh -c "npm run migrate"
+docker exec payments_app03_1 sh -c "npm run migrate"
+```
+
+you can check the health check now at `http://localhost:80/health`.
+
+# Run the app without docker containers:
 
 ```bash
 npm i
@@ -69,6 +97,12 @@ run the seeds
 knex seed:run
 ```
 
+## Auth
+
+This app has a simple `JWT` authentication, which you can generate at https://jwt.io using the secret `qonto-secret-simulation`.
+
+Having done this you can now access the app passing the `Bearer <token>` in the Authorization header.
+
 you can check if everything is fine running the assertions
 ```bash
 npm run test
@@ -78,24 +112,8 @@ generate coverage
 npm run coverage
 ```
 
+# Test Coverage
+
+here you have the test coverage report:
 <img width="1206" alt="Screen Shot 2022-10-17 at 21 31 53" src="https://user-images.githubusercontent.com/33763843/196266170-4a688771-f154-468e-b181-eb7f12373d65.png">
 
-
-### Run server with Docker
-
-make sure to run the migrations
-
-```bash
-docker exec <container> sh -c "npm run migrate"
-```
-
-you can start the instances using docker compose
-
-```bash
-docker-compose up
-```
-
-to avoid any trouble in case of using docker I highly recommend you to stop your local postgres process
-```bash
-brew services stop postgresql
-```
