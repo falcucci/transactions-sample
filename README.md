@@ -139,7 +139,7 @@ npm run coverage
 
 here you have a simple test coverage report:
 
-<img width="1206" alt="Screen Shot 2022-10-17 at 21 31 53" src="https://user-images.githubusercontent.com/33763843/196266170-4a688771-f154-468e-b181-eb7f12373d65.png">
+<img width="1203" alt="Screen Shot 2022-10-18 at 02 08 11" src="https://user-images.githubusercontent.com/33763843/196306004-46fb6c8b-951d-4d3a-a974-577fd260e7f2.png">
 
 # Final considerations
 
