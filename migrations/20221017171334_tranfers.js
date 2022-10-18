@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
  return knex.schema.createTable("transfers", function (table) {
    table.increments('id').primary();
-   table.integer("amount_cents");
+   table.decimal('amount_cents', 14, 2)
    table.string("counterparty_name", 255).notNullable();
    table.string("counterparty_iban", 255).notNullable();
    table.string("counterparty_bic", 255).notNullable();

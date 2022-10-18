@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         field: "organization_name",
       },
       balanceCents: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10, 2),
         field: "balance_cents",
       },
       iban: {

@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
         field: "counterparty_bic",
       },
       amountCents: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         field: "amount_cents",
       },
