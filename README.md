@@ -35,12 +35,10 @@ After that, run the docker compose:
 sudo docker-compose up -d
 ```
 
-Also please, run our migrations manually just to make sure that everything is okay for consuming the application and send requests.
+Also make sure our postgres is `up` and run our migrations manually just to make sure that everything is okay for consuming the application and send requests.
 
 ```bash
 docker exec payments_app01_1 sh -c "npm run migrate"
-docker exec payments_app02_1 sh -c "npm run migrate"
-docker exec payments_app03_1 sh -c "npm run migrate"
 ```
 
 you can check the health check now at `http://localhost:80/health`.
