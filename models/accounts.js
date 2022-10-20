@@ -39,20 +39,41 @@ module.exports = function (sequelize, DataTypes) {
             where: { '$and' : [{  iban: iban }, { bic: bic}]}
           });
         },
-        create: function (obj, transfers=[]) {
-          return obj.save().then(row => {
-            transfers.forEach(transfer => {
-              this.models().transfer.build({
-                accountId: row.id,
+        create: async function (iban, bic, funds, transfers=[]) {
+          return await sequelize.transaction(async (t) => {
+            const acc = await account.findOne({
+              where: { '$and' : [{  iban: iban }, { bic: bic}]},
+              lock: t.LOCK.UPDATE
+            }, { transaction: t })
+
+            if (!acc) {
+              return []
+            }
+
+            const balance = acc.balanceCents
+            if (funds > balance) {
+              return [acc, false]
+            }
+
+            await sequelize.query(
+              "update public.accounts set balance_cents = balance_cents - ? where id = ?;",
+              { replacements: [funds, acc.id], transaction: t }
+            )
+
+            const bulk = transfers.map(transfer => {
+              return {
+                accountId: acc.id,
                 counterPartyName: transfer.counterparty_name,
                 counterPartyIban: transfer.counterparty_iban,
                 counterPartyBic: transfer.counterparty_bic,
                 description: transfer.description,
-                amountCents: transfer.amount,
-              }).save()
+                amountCents: transfer.amount,  
+              }
             })
-            return row
+            await this.models().transfer.bulkCreate(bulk, { transaction: t })
+            return [acc, true]  
           })
+
         },
       },
     }

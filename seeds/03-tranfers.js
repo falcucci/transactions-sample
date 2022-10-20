@@ -6,7 +6,6 @@ exports.seed = function(knex, Promise) {
     knex('transfers').del(),
     // Inserts seed entries
     knex('transfers').insert({
-      id: 1,
       counterparty_name: 'ACME Corp. Main Account',
       counterparty_iban: 'EE382200221020145685',
       counterparty_bic: 'CCOPFRPPXXX',
@@ -15,7 +14,6 @@ exports.seed = function(knex, Promise) {
       description: 'Treasury management',
     }),
     knex('transfers').insert({
-      id: 2,
       counterparty_name: 'Bip Bip',
       counterparty_iban: 'EE383680981021245685',
       counterparty_bic: 'CRLYFRPPTOU',

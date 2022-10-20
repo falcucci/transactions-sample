@@ -34,25 +34,23 @@ function * add() {
     throw result.error;
   }
 
+  const funds = _.sumBy(result.value.body.credit_transfers, 'amount')
   const iban = result.value.body.organization_iban
   const bic = result.value.body.organization_bic
-  const account = yield models.account.find(iban, bic)
+
+  const [account, status] = yield models.account.create(
+    iban, bic, funds, result.value.body.credit_transfers
+  );
+
   if(!account) {
     throw boom.notFound('account Not Found');
   }
-  const balance = account.balanceCents
-  const funds = _.sumBy(result.value.body.credit_transfers, 'amount')
 
-  if (funds > balance) {
+  if (!status) {
     throw boom.preconditionFailed(
       'customer has not enough funds for all the transfers'
     );
   }
-  account.balanceCents = balance - funds
-  const updatedAccount = yield models.account.create(
-    account,
-    result.value.body.credit_transfers
-  );
 
   this.status = HttpStatus.CREATED;
 }
