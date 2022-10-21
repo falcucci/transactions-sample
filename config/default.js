@@ -7,11 +7,11 @@ module.exports = {
     host: "0.0.0.0",
     port: process.env["PORT"] || 3000,
     basePath: process.env["BASE_PATH"] || "/accounts",
-    secret: 'qonto-secret-simulation'
+    secret: 'bank-secret-simulation'
   },
   dataSources: {
     account: {
-      name: process.env["DATASOURCES_ACCOUNT_HOST"] || "qonto_accounts_db",
+      name: process.env["DATASOURCES_ACCOUNT_HOST"] || "bank_accounts_db",
       username: process.env["DATASOURCES_ACCOUNT_USER"] || "accounts",
       password:
         process.env["DATASOURCES_ACCOUNT_PASSWORD"] || "localhost",

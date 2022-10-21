@@ -7,7 +7,7 @@ module.exports = {
         process.env["DATASOURCES_ACCOUNT_ADDR"] ||
         "localhost",
       port: process.env["DATASOURCES_ACCOUNT_PORT"] || 5432,
-      database: process.env["DATASOURCES_ACCOUNT_HOST"] || "qonto_accounts_db",
+      database: process.env["DATASOURCES_ACCOUNT_HOST"] || "bank_accounts_db",
       user: process.env["DATASOURCES_ACCOUNT_USER"] || "accounts",
       password: process.env["DATASOURCES_ACCOUNT_PASSWORD"] || "localhost",
     },
