@@ -60,7 +60,7 @@ services:
     environment:
       POSTGRES_USER: accounts
       POSTGRES_PASSWORD: localhost
-      POSTGRES_DB: qonto_accounts_db
+      POSTGRES_DB: bank_accounts_db
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
 

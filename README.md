@@ -70,9 +70,9 @@ create a new user and the password as follows
 ```bash
 postgres=# CREATE ROLE accounts WITH LOGIN PASSWORD localhost;
 ```
-now you need to create a db and name it as `qonto_accounts_db`
+now you need to create a db and name it as `bank_accounts_db`
 ```bash
-postgres=# CREATE DATABASE qonto_accounts_db;
+postgres=# CREATE DATABASE bank_accounts_db;
 ```
 
 or just run:
@@ -97,7 +97,7 @@ knex seed:run
 
 ## Auth
 
-This app has a simple `JWT` authentication, which you can generate at https://jwt.io using the secret `qonto-secret-simulation`.
+This app has a simple `JWT` authentication, which you can generate at https://jwt.io using the secret `bank-secret-simulation`.
 
 Having done this you can now access the app passing the `Bearer <token>` through the Authorization header parameter.
 
@@ -148,7 +148,7 @@ Another reason is due to concurrency issues which `sqlite` wouldn't be able to h
 `Sequelize` lib is an useful lib which can help us to avoid this problems automatically just enabling the [optimistic-locking](https://sequelize.org/docs/v6/other-topics/optimistic-locking/) to avoid overwriting versioning the data and avoiding possible bugs. This problem is also really recurrent for product stocks aswell.
 
 This challenge resolves to follwing tasks:
-1. Verify the validity of the request: whether the Qonto customer has enough funds for all the transfers in the request. If the customer does not have enough funds, the entire request should be denied;
+1. Verify the validity of the request: whether the bank customer has enough funds for all the transfers in the request. If the customer does not have enough funds, the entire request should be denied;
 2. If the request must be denied, return a 422 HTTP response;
 3. Otherwise, add the transfers to the database, update the customer's balance, and return a 201 HTTP response;
 4. Ensure you don’t lose a cent during processing;
