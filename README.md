@@ -1,6 +1,6 @@
 <h1 align="center">SAMPLE TRANSACTIONS SERVICE</h1>
 
-<p align="center">A Sample assignment.</p>
+<p align="center">A Simple Sample Application.</p>
 
 ___
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/77d5aa4661cf6d202d9a)
